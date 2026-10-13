@@ -27,3 +27,7 @@
 - langchain-mcp-adapters: `client.get_tools()` opens a new server session per tool call, so
   the simulator would forget jobs between submit and job_status. graph.py keeps one
   `client.session(...)` open for the whole run. `handle_tool_errors=False` so tool errors raise.
+- Evals (13 Oct, 15 cases): 14/15. The planner turned "50 copies" silently into 5 (the
+  schema's max) and printed. Fix (David's rule: never change the request): no upper limit
+  on copies in the planner's schema, a prompt rule to copy the number and ask, and the
+  printer side refuses over 5. Lesson: a schema limit makes the model clamp silently.

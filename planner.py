@@ -38,7 +38,9 @@ class Order(BaseModel):
                                     description='Page numbers only, like "2-5" or "1,3,5-7". None means all pages.')
     page_set: Literal["odd", "even"] | None = Field(None, description="Only odd or only even pages.")
     reverse: bool = Field(False, description="Print in reverse order (last page first).")
-    copies: int = Field(1, ge=1, le=5)
+    # no upper limit here on purpose: the model must copy the user's number,
+    # and the printer side refuses more than 5
+    copies: int = Field(1, ge=1, description="Exactly the number of copies the user asked for.")
     number_up: Literal[1, 2, 4] = Field(1, description="Pages per sheet.")
     toner_density: int = Field(4, ge=1, le=16, description="1 lightest, 16 darkest, 4 normal.")
     toner_save: bool = Field(False, description="Toner save (draft) mode.")
@@ -56,6 +58,9 @@ Turn the user's request into an order. Rules:
 - "odd pages" / "even pages" go in page_set, never in page_ranges.
 - "reverse order", "backwards" or "last page first" means reverse true.
 - If the request is unclear or not about printing, put a question in 'questions'.
+- Never change what the user asked for. If they ask for something over a limit
+  (more than 5 copies), write their number exactly and add a question in
+  'questions' saying it is over the limit and asking what they want instead.
 
 Request: {request}"""
 
