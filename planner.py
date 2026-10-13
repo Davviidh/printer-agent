@@ -33,7 +33,7 @@ MODEL = os.environ.get("PLANNER_MODEL", "nvidia/nemotron-3-super-120b-a12b:free"
 
 class Order(BaseModel):
     """The print order the planner fills in."""
-    file: str | None = Field(None, description="File to print, exactly as the user named it. None if not given.")
+    file: str | None = Field(None, description='The words the user used to name the document, e.g. "lecture 6" or "alice.pdf". None if not given.')
     page_ranges: str | None = Field(None, pattern=r"^\d+(-\d+)?(,\d+(-\d+)?)*$",
                                     description='Page numbers only, like "2-5" or "1,3,5-7". None means all pages.')
     page_set: Literal["odd", "even"] | None = Field(None, description="Only odd or only even pages.")
@@ -50,7 +50,11 @@ class Order(BaseModel):
 
 PROMPT = """You plan print jobs for a Canon laser printer (black and white, A4, no duplex).
 Turn the user's request into an order. Rules:
-- Never invent a file name. If no file is named, leave file empty and ask which file.
+- The document can be named loosely ("lecture 6", "the alice book", "report.pdf"):
+  copy those words into file; a search tool finds the real file later.
+  Words like "from my downloads folder" are not part of the name.
+  Never invent a name. If no document is named, leave file empty and ask.
+- "page 3" means page_ranges "3". page_set is ONLY for the words odd/even.
 - "light" or "light toner" means toner_density 2. "very light" means 1. "dark" means 7.
 - "save toner" or "draft" means toner_save true.
 - Only use what the user said; leave everything else at its default

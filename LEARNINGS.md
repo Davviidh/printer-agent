@@ -31,3 +31,8 @@
   schema's max) and printed. Fix (David's rule: never change the request): no upper limit
   on copies in the planner's schema, a prompt rule to copy the number and ask, and the
   printer side refuses over 5. Lesson: a schema limit makes the model clamp silently.
+- David's real test "print page 1 of lecture 6 from my downloads folder" (13 Oct): the
+  planner dropped the name (it only saw names with ".pdf" as names) and turned "page 1"
+  into page_set=odd. Fixed in the prompt (loose names are names; page_set only for the
+  words odd/even) and the finder ignores filler words ("the", "document", "book").
+  Added as evals name-1 and name-2.

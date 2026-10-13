@@ -27,10 +27,15 @@ def search_dir():
     return Path(os.environ.get("FINDER_DIR", Path.home() / "Downloads")).resolve()
 
 
+# words people say around a name that are not part of it
+FILLER = {"the", "my", "a", "an", "document", "doc", "file", "pdf", "book"}
+
+
 def _norm(name):
-    """'Alice_in-Wonderland.PDF' -> 'alice in wonderland'"""
+    """'the Alice_in-Wonderland.PDF book' -> 'alice in wonderland'"""
     name = re.sub(r"\.pdf$", "", name.strip().lower())
-    return re.sub(r"[\s_\-.]+", " ", name).strip()
+    words = re.sub(r"[\s_\-.]+", " ", name).split()
+    return " ".join(w for w in words if w not in FILLER)
 
 
 def _pdfs(root):

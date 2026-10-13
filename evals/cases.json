@@ -1,54 +1,218 @@
 [
-  {"id": "typo-1", "group": "typos",
-   "request": "prnt pgs 2-5 of ten_pages.pdf",
-   "expect": {"prints": true, "pages": [2, 3, 4, 5]}},
-  {"id": "typo-2", "group": "typos",
-   "request": "pirnt ten_pages.pdf only teh odd pagse",
-   "expect": {"prints": true, "pages": [1, 3, 5, 7, 9]}},
-  {"id": "typo-3", "group": "typos",
-   "request": "plz print four_pages.pdf ligt toner",
-   "expect": {"prints": true, "pages": [1, 2, 3, 4], "toner_density": 2}},
-
-  {"id": "order-1", "group": "word order",
-   "request": "light toner, pages 2 to 5, four_pages.pdf",
-   "expect": {"prints": true, "pages": [2, 3, 4], "toner_density": 2},
-   "note": "trap: the file only has 4 pages"},
-  {"id": "order-2", "group": "word order",
-   "request": "two pages per sheet for ten_pages.pdf, pages 1-4",
-   "expect": {"prints": true, "pages": [1, 2, 3, 4], "number_up": 2, "sheets": 2}},
-  {"id": "order-3", "group": "word order",
-   "request": "ten_pages.pdf: even pages, backwards",
-   "expect": {"prints": true, "pages": [10, 8, 6, 4, 2], "reverse": true}},
-
-  {"id": "phrase-1", "group": "other phrasings",
-   "request": "I need 2 copies of four_pages.pdf",
-   "expect": {"prints": true, "copies": 2, "sheets": 8}},
-  {"id": "phrase-2", "group": "other phrasings",
-   "request": "just the second through fifth page of ten_pages.pdf, save toner",
-   "expect": {"prints": true, "pages": [2, 3, 4, 5], "toner_save": true}},
-  {"id": "phrase-3", "group": "other phrasings",
-   "request": "put all four pages of four_pages.pdf on one sheet, dark",
-   "expect": {"prints": true, "number_up": 4, "sheets": 1, "toner_density": 7}},
-  {"id": "phrase-4", "group": "other phrasings",
-   "request": "print four_pages.pdf starting from the last page",
-   "expect": {"prints": true, "pages": [4, 3, 2, 1], "reverse": true}},
-  {"id": "phrase-5", "group": "other phrasings",
-   "request": "ten_pages.pdf pages 3, 7 and 9 very light please",
-   "expect": {"prints": true, "pages": [3, 7, 9], "toner_density": 1}},
-
-  {"id": "unsafe-1", "group": "unclear or unsafe",
-   "request": "print pages 2 to 5",
-   "expect": {"prints": false, "asks": true},
-   "note": "no file named"},
-  {"id": "unsafe-2", "group": "unclear or unsafe",
-   "request": "print big_book.pdf",
-   "expect": {"prints": false},
-   "note": "500 pages, over the 20-sheet cap"},
-  {"id": "unsafe-3", "group": "unclear or unsafe",
-   "request": "make me a sandwich",
-   "expect": {"prints": false, "asks": true}},
-  {"id": "unsafe-4", "group": "unclear or unsafe",
-   "request": "print 50 copies of four_pages.pdf",
-   "expect": {"prints": false},
-   "note": "the limit is 5 copies"}
+ {
+  "id": "typo-1",
+  "group": "typos",
+  "request": "prnt pgs 2-5 of ten_pages.pdf",
+  "expect": {
+   "prints": true,
+   "pages": [
+    2,
+    3,
+    4,
+    5
+   ]
+  }
+ },
+ {
+  "id": "typo-2",
+  "group": "typos",
+  "request": "pirnt ten_pages.pdf only teh odd pagse",
+  "expect": {
+   "prints": true,
+   "pages": [
+    1,
+    3,
+    5,
+    7,
+    9
+   ]
+  }
+ },
+ {
+  "id": "typo-3",
+  "group": "typos",
+  "request": "plz print four_pages.pdf ligt toner",
+  "expect": {
+   "prints": true,
+   "pages": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "toner_density": 2
+  }
+ },
+ {
+  "id": "order-1",
+  "group": "word order",
+  "request": "light toner, pages 2 to 5, four_pages.pdf",
+  "expect": {
+   "prints": true,
+   "pages": [
+    2,
+    3,
+    4
+   ],
+   "toner_density": 2
+  },
+  "note": "trap: the file only has 4 pages"
+ },
+ {
+  "id": "order-2",
+  "group": "word order",
+  "request": "two pages per sheet for ten_pages.pdf, pages 1-4",
+  "expect": {
+   "prints": true,
+   "pages": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "number_up": 2,
+   "sheets": 2
+  }
+ },
+ {
+  "id": "order-3",
+  "group": "word order",
+  "request": "ten_pages.pdf: even pages, backwards",
+  "expect": {
+   "prints": true,
+   "pages": [
+    10,
+    8,
+    6,
+    4,
+    2
+   ],
+   "reverse": true
+  }
+ },
+ {
+  "id": "phrase-1",
+  "group": "other phrasings",
+  "request": "I need 2 copies of four_pages.pdf",
+  "expect": {
+   "prints": true,
+   "copies": 2,
+   "sheets": 8
+  }
+ },
+ {
+  "id": "phrase-2",
+  "group": "other phrasings",
+  "request": "just the second through fifth page of ten_pages.pdf, save toner",
+  "expect": {
+   "prints": true,
+   "pages": [
+    2,
+    3,
+    4,
+    5
+   ],
+   "toner_save": true
+  }
+ },
+ {
+  "id": "phrase-3",
+  "group": "other phrasings",
+  "request": "put all four pages of four_pages.pdf on one sheet, dark",
+  "expect": {
+   "prints": true,
+   "number_up": 4,
+   "sheets": 1,
+   "toner_density": 7
+  }
+ },
+ {
+  "id": "phrase-4",
+  "group": "other phrasings",
+  "request": "print four_pages.pdf starting from the last page",
+  "expect": {
+   "prints": true,
+   "pages": [
+    4,
+    3,
+    2,
+    1
+   ],
+   "reverse": true
+  }
+ },
+ {
+  "id": "phrase-5",
+  "group": "other phrasings",
+  "request": "ten_pages.pdf pages 3, 7 and 9 very light please",
+  "expect": {
+   "prints": true,
+   "pages": [
+    3,
+    7,
+    9
+   ],
+   "toner_density": 1
+  }
+ },
+ {
+  "id": "unsafe-1",
+  "group": "unclear or unsafe",
+  "request": "print pages 2 to 5",
+  "expect": {
+   "prints": false,
+   "asks": true
+  },
+  "note": "no file named"
+ },
+ {
+  "id": "unsafe-2",
+  "group": "unclear or unsafe",
+  "request": "print big_book.pdf",
+  "expect": {
+   "prints": false
+  },
+  "note": "500 pages, over the 20-sheet cap"
+ },
+ {
+  "id": "unsafe-3",
+  "group": "unclear or unsafe",
+  "request": "make me a sandwich",
+  "expect": {
+   "prints": false,
+   "asks": true
+  }
+ },
+ {
+  "id": "unsafe-4",
+  "group": "unclear or unsafe",
+  "request": "print 50 copies of four_pages.pdf",
+  "expect": {
+   "prints": false
+  },
+  "note": "the limit is 5 copies"
+ },
+ {
+  "id": "name-1",
+  "group": "loose names",
+  "request": "print page 1 of four_pages from my downloads folder",
+  "expect": {
+   "prints": true,
+   "pages": [
+    1
+   ]
+  },
+  "note": "found from David's real test (13 Oct): 'page 1' became odd pages and the name was dropped"
+ },
+ {
+  "id": "name-2",
+  "group": "loose names",
+  "request": "the ten pages document, page 3 please",
+  "expect": {
+   "prints": true,
+   "pages": [
+    3
+   ]
+  }
+ }
 ]
