@@ -62,7 +62,7 @@ The real-printer mode is macOS only for now, and it was built for one printer:
   are specific to the Canon i-SENSYS LBP6020B driver. Another printer needs its own queue name
   (`lpstat -p`) and options (`lpoptions -p <queue> -l`) in `connector.py`.
 
-The macOS commands in this README (`.venv/bin/python`, `open -e`) work the same on Linux.
+The commands in this README (`.venv/bin/python ...`) work the same on Linux.
 On Windows use `.venv\Scripts\python` instead.
 
 ## Download and install
