@@ -48,8 +48,6 @@ checker   (no tools)                     decides from the readings:
 
 ## Download and install
 
-The repository is private, so you need access to it first.
-
 ```
 git clone https://github.com/Davviidh/printer-agent.git
 cd printer-agent
