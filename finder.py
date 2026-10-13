@@ -28,7 +28,7 @@ def search_dir():
 
 
 # words people say around a name that are not part of it
-FILLER = {"the", "my", "a", "an", "document", "doc", "file", "pdf", "book"}
+FILLER = {"the", "my", "a", "an", "document", "doc", "file", "pdf", "book", "paper", "article"}
 
 
 def _norm(name):

@@ -29,6 +29,7 @@ from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.types import Command, interrupt
 
+import doc_finder
 import finder
 import planner
 
@@ -45,6 +46,10 @@ class State(TypedDict, total=False):
     order: dict           # filled in by the planner
     options: dict         # order turned into printer options
     path: str             # the file actually used
+    candidates: list      # arXiv papers found when the file is not local
+    searched: bool        # arXiv was already searched for this request
+    picked: int           # which candidate the human chose (-1: none)
+    chosen_path: str      # the downloaded file
     present: bool         # is the printer on? (from the executor)
     preview: dict         # pages and sheets (from the executor)
     note: str             # what the human sees before approving
@@ -114,8 +119,21 @@ def build(tools):
 
     async def executor_node(state):
         status = tool_result(await by_name["printer_status"].ainvoke({}))
-        found = finder.find(state["order"].get("file") or "")
+        name = state["order"].get("file") or ""
+        found = ({"path": state["chosen_path"]} if state.get("chosen_path")
+                 else finder.find(name))
         path = found.get("path", "")
+        if "error" in found and name and not state.get("searched"):
+            # not in Downloads: look on arXiv (search only, no download)
+            try:
+                candidates = doc_finder.search_arxiv(name)
+            except Exception as e:
+                log.error(f"arXiv search failed: {type(e).__name__}: {e}")
+                candidates = []
+                found["error"] += f"; arXiv search failed: {e}"
+            if candidates:
+                return {"present": status["present"], "candidates": candidates,
+                        "searched": True, "preview": {"error": found["error"]}}
         if "choices" in found:
             preview = {"error": "several files match, please name one exactly: "
                        + ", ".join(Path(c).name for c in found["choices"])}
@@ -126,6 +144,28 @@ def build(tools):
                 {"path": path, "options": state["options"]}))
         log.info(f"executor: present={status['present']} preview={preview}")
         return {"present": status["present"], "preview": preview, "path": path}
+
+    def after_executor(state):
+        if state.get("candidates") and not state.get("chosen_path"):
+            return "pick_download"
+        return "approval"
+
+    def pick_download_node(state):
+        lines = [f"'{state['order']['file']}' is not in your Downloads. Found on arXiv:"]
+        for i, c in enumerate(state["candidates"], 1):
+            authors = ", ".join(c["authors"][:2]) + (" et al." if len(c["authors"]) > 2 else "")
+            lines.append(f"  {i}) {c['title']} - {authors} ({c['year']})")
+        lines.append("Download one into Downloads? Type its number, or no")
+        answer = interrupt("\n".join(lines)).strip().lower()
+        n = len(state["candidates"])
+        picked = int(answer) - 1 if answer.isdigit() and 1 <= int(answer) <= n else -1
+        log.info(f"human picked download: {answer!r} -> {picked}")
+        return {"picked": picked, **({} if picked >= 0 else {"outcome": "nothing downloaded"})}
+
+    async def download_node(state):
+        # executor role: the only node that fetches from outside
+        path = doc_finder.download(state["candidates"][state["picked"]])
+        return {"chosen_path": path, "candidates": []}
 
     def approval_node(state):
         note = make_note(state)
@@ -219,7 +259,14 @@ def build(tools):
     g.add_node("executor_cancel", cancel_node)
     g.add_edge(START, "planner")
     g.add_edge("planner", "executor")
-    g.add_edge("executor", "approval")
+    g.add_node("pick_download", pick_download_node)
+    g.add_node("executor_download", download_node)
+    g.add_conditional_edges("executor", after_executor,
+                            {"pick_download": "pick_download", "approval": "approval"})
+    g.add_conditional_edges("pick_download",
+                            lambda s: "download" if s["picked"] >= 0 else END,
+                            {"download": "executor_download", END: END})
+    g.add_edge("executor_download", "executor")
     g.add_conditional_edges("approval", after_approval,
                             {"submit": "executor_submit", END: END})
     g.add_edge("executor_submit", "executor_read")

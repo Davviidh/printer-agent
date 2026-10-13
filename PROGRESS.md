@@ -15,6 +15,8 @@
 
 - `finder.py`: finds the PDF to print only inside ~/Downloads (case, typos, partial names; several matches -> human picks; links outside Downloads ignored). Used by the executor. Evals use FINDER_DIR=test_docs.
 
+- `doc_finder.py`: if the file is not in Downloads, searches arXiv (only arxiv.org, allowlist checked on every redirect), shows 3 results, downloads only the one the human picks, PDF header and 30 MB checked, saved into Downloads.
+
 ## Next
 - Four-role LangGraph agent graph (planner, human approval, executor with the MCP tools, checker).
 - Then: Downloads file finder, document finder, manual two-sided printing test, evals, part 2.
