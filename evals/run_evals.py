@@ -23,6 +23,9 @@ from langchain_mcp_adapters.client import MultiServerMCPClient  # noqa: E402
 from langchain_mcp_adapters.tools import load_mcp_tools  # noqa: E402
 from langgraph.types import Command  # noqa: E402
 
+# the evals' documents live in test_docs/, not in ~/Downloads
+os.environ["FINDER_DIR"] = str(ROOT / "test_docs")
+
 import graph  # noqa: E402  (also sets up logging via planner)
 
 log = logging.getLogger("evals")

@@ -29,6 +29,7 @@ from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.types import Command, interrupt
 
+import finder
 import planner
 
 ROOT = Path(__file__).parent
@@ -69,18 +70,6 @@ def order_to_options(order):
     if order.get("reverse"):
         opts["outputorder"] = "reverse"
     return opts
-
-
-# Until the Downloads file finder exists, a bare file name is looked up
-# in test_docs/ as well.
-DOC_DIRS = [Path.cwd(), ROOT / "test_docs"]
-
-
-def resolve(file):
-    for d in DOC_DIRS:
-        if file and (d / file).is_file():
-            return str(d / file)
-    return file
 
 
 def make_note(state):
@@ -125,9 +114,16 @@ def build(tools):
 
     async def executor_node(state):
         status = tool_result(await by_name["printer_status"].ainvoke({}))
-        path = resolve(state["order"].get("file") or "")
-        preview = tool_result(await by_name["preview_print"].ainvoke(
-            {"path": path, "options": state["options"]}))
+        found = finder.find(state["order"].get("file") or "")
+        path = found.get("path", "")
+        if "choices" in found:
+            preview = {"error": "several files match, please name one exactly: "
+                       + ", ".join(Path(c).name for c in found["choices"])}
+        elif "error" in found:
+            preview = {"error": found["error"]}
+        else:
+            preview = tool_result(await by_name["preview_print"].ainvoke(
+                {"path": path, "options": state["options"]}))
         log.info(f"executor: present={status['present']} preview={preview}")
         return {"present": status["present"], "preview": preview, "path": path}
 

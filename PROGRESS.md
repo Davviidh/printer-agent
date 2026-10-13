@@ -13,6 +13,8 @@
 
 - `graph.py`: full loop planner -> executor (preview) -> approval -> executor (submit, read) -> checker (David's table) with wait / retry / cancel / done. Tested on the simulator: normal, fail, stuck, off. First real run 13 Oct: job 132, 1 page, human confirmed.
 
+- `finder.py`: finds the PDF to print only inside ~/Downloads (case, typos, partial names; several matches -> human picks; links outside Downloads ignored). Used by the executor. Evals use FINDER_DIR=test_docs.
+
 ## Next
 - Four-role LangGraph agent graph (planner, human approval, executor with the MCP tools, checker).
 - Then: Downloads file finder, document finder, manual two-sided printing test, evals, part 2.

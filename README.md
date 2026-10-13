@@ -121,7 +121,7 @@ Nothing prints until you type `yes`. Start with one page.
 - pages per sheet (1, 2 or 4): "two pages per sheet"
 - toner: "light toner", "very light", "dark", "save toner"
 
-Only PDF files are supported. If you don't name a file, the agent asks for one.
+Only PDF files are supported, and the agent only looks for them in your `~/Downloads` folder (and its subfolders). Small typos in the name are fine. If several files match, it asks you to name one exactly. If you do not name a file, it asks for one.
 
 ### Other ways to run the parts
 
