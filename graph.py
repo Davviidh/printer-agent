@@ -43,6 +43,7 @@ class State(TypedDict, total=False):
     request: str          # the user's sentence
     order: dict           # filled in by the planner
     options: dict         # order turned into printer options
+    path: str             # the file actually used
     present: bool         # is the printer on? (from the executor)
     preview: dict         # pages and sheets (from the executor)
     note: str             # what the human sees before approving
@@ -68,6 +69,18 @@ def order_to_options(order):
     if order.get("reverse"):
         opts["outputorder"] = "reverse"
     return opts
+
+
+# Until the Downloads file finder exists, a bare file name is looked up
+# in test_docs/ as well.
+DOC_DIRS = [Path.cwd(), ROOT / "test_docs"]
+
+
+def resolve(file):
+    for d in DOC_DIRS:
+        if file and (d / file).is_file():
+            return str(d / file)
+    return file
 
 
 def make_note(state):
@@ -112,11 +125,11 @@ def build(tools):
 
     async def executor_node(state):
         status = tool_result(await by_name["printer_status"].ainvoke({}))
-        file = state["order"].get("file") or ""
+        path = resolve(state["order"].get("file") or "")
         preview = tool_result(await by_name["preview_print"].ainvoke(
-            {"path": file, "options": state["options"]}))
+            {"path": path, "options": state["options"]}))
         log.info(f"executor: present={status['present']} preview={preview}")
-        return {"present": status["present"], "preview": preview}
+        return {"present": status["present"], "preview": preview, "path": path}
 
     def approval_node(state):
         note = make_note(state)
@@ -132,7 +145,7 @@ def build(tools):
 
     async def submit_node(state):
         res = tool_result(await by_name["submit_print"].ainvoke(
-            {"path": state["order"]["file"], "options": state["options"]}))
+            {"path": state["path"], "options": state["options"]}))
         if "error" in res:
             log.error(f"submit refused: {res['error']}")
             raise RuntimeError(f"submit refused: {res['error']}")
