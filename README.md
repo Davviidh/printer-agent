@@ -100,8 +100,8 @@ Type `yes` or `no`. After `yes`, answer the checker's questions.
 Try the problem cases on the simulator:
 
 ```
-SIM_FAULT=fail  .venv/bin/python graph.py "print page 1 of four_pages.pdf"   # job fails
-SIM_FAULT=stuck .venv/bin/python graph.py "print page 1 of four_pages.pdf"   # stuck, wait about 60 s
+FINDER_DIR=test_docs SIM_FAULT=fail  .venv/bin/python graph.py "print page 1 of four_pages.pdf"   # job fails
+FINDER_DIR=test_docs SIM_FAULT=stuck .venv/bin/python graph.py "print page 1 of four_pages.pdf"   # stuck, wait about 60 s
 FINDER_DIR=test_docs SIM_POWERED=0 SIM_ON_AFTER=20 .venv/bin/python graph.py "print page 1 of four_pages.pdf"   # off, comes on after 20 s
 ```
 
