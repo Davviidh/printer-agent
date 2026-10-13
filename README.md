@@ -36,6 +36,9 @@ checker   (no tools)                     decides from the readings:
 | `printer_server.py` | MCP server that offers the printer actions as 5 tools. |
 | `planner.py` | Turns a sentence into a print order with an LLM. |
 | `graph.py` | The LangGraph graph: planner, executor, approval, checker. |
+| `finder.py` | Finds the PDF to print, only inside `~/Downloads`. |
+| `doc_finder.py` | Searches arXiv when the file is not in Downloads, and downloads the paper you pick. |
+| `evals/` | Test requests with expected answers, and a runner that scores the agent on the simulator. |
 | `LEARNINGS.md` | What we found out while building (read this, some of it is surprising). |
 | `PROGRESS.md` | What is done and what is next. |
 
@@ -125,6 +128,59 @@ Nothing prints until you type `yes`. Start with one page.
 - toner: "light toner", "very light", "dark", "save toner"
 
 Only PDF files are supported, and the agent only looks for them in your `~/Downloads` folder (and its subfolders). Small typos in the name are fine. If several files match, it asks you to name one exactly. If you do not name a file, it asks for one.
+
+### Papers from arXiv
+
+If the document is not in your Downloads, the agent searches [arXiv](https://arxiv.org)
+(free research papers) and asks before downloading anything:
+
+```
+.venv/bin/python graph.py "print page 1 of the attention is all you need paper"
+```
+
+```
+'the attention is all you need paper' is not in your Downloads. Found on arXiv:
+  1) Attention Is All You Need - Ashish Vaswani, Noam Shazeer et al. (2017)
+  2) Not All Attention Is All You Need - Hongqiu Wu, Hai Zhao et al. (2021)
+  3) Tensor Product Attention Is All You Need - Yifan Zhang, Yifeng Liu et al. (2025)
+Download one into Downloads? Type its number, or no
+```
+
+Type a number to download that paper into `~/Downloads`. Then you get the normal print
+order for your original request (here: page 1) and must say `yes` again before anything
+prints. Type `no` to stop. You can also give the arXiv number, like "print 1706.03762".
+
+Safety rules:
+- only arxiv.org is ever contacted (every redirect is checked too)
+- nothing is downloaded without your choice, nothing is printed without your `yes`
+- the download must be a real PDF and under 30 MB
+
+### Settings
+
+Settings can go in `.env` (once) or in front of a single command (that run only, and it
+wins over `.env`). Write them without spaces around `=`.
+
+| Setting | Default | Meaning |
+|---|---|---|
+| `PRINTER_BACKEND` | `sim` | `real` prints on the Canon, `sim` uses the simulated printer |
+| `FINDER_DIR` | `~/Downloads` | where to look for documents (the examples use `test_docs`) |
+| `PLANNER_MODEL` | `nvidia/nemotron-3-super-120b-a12b:free` | the OpenRouter model of the planner |
+| `SIM_FAULT` | none | simulator only: `fail` or `stuck` |
+| `SIM_POWERED`, `SIM_ON_AFTER` | `1`, none | simulator only: start switched off, switch on after N seconds |
+
+For example, to always print on the real printer, add `PRINTER_BACKEND=real` to `.env`.
+
+### Run the evals
+
+```
+.venv/bin/python evals/run_evals.py           # all test requests
+.venv/bin/python evals/run_evals.py typo-1    # one of them
+```
+
+Each request in `evals/cases.json` runs through the whole agent on the simulator, every
+question is answered "yes" automatically, and the result is compared with the expected
+answer. Results are saved in `evals/results_*.json`. Each request uses one call to the
+free model, so mind the limit of about 50 a day.
 
 ### Other ways to run the parts
 
