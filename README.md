@@ -73,15 +73,18 @@ Free models allow about 50 requests a day.
 
 ### 1. Safe first: the simulated printer (no paper)
 
+The agent looks for files in `~/Downloads`. `FINDER_DIR=test_docs` makes it look in the
+project's test documents instead, so these examples work right away.
+
 ```
-.venv/bin/python graph.py "print only odd pages of test_docs/four_pages.pdf, save toner"
+FINDER_DIR=test_docs .venv/bin/python graph.py "print only odd pages of four_pages.pdf, save toner"
 ```
 
 You will see the print order:
 
 ```
 PRINT ORDER - please check
-File:      test_docs/four_pages.pdf (4 pages)
+File:      .../test_docs/four_pages.pdf (4 pages)
 Pages:     odd -> [1, 3]
 Layout:    1 page(s) per sheet, 1 copy/copies
 Order:     normal
@@ -97,9 +100,9 @@ Type `yes` or `no`. After `yes`, answer the checker's questions.
 Try the problem cases on the simulator:
 
 ```
-SIM_FAULT=fail  .venv/bin/python graph.py "print page 1 of test_docs/four_pages.pdf"   # job fails
-SIM_FAULT=stuck .venv/bin/python graph.py "print page 1 of test_docs/four_pages.pdf"   # stuck, wait about 60 s
-SIM_POWERED=0 SIM_ON_AFTER=20 .venv/bin/python graph.py "print page 1 of test_docs/four_pages.pdf"   # off, comes on after 20 s
+SIM_FAULT=fail  .venv/bin/python graph.py "print page 1 of four_pages.pdf"   # job fails
+SIM_FAULT=stuck .venv/bin/python graph.py "print page 1 of four_pages.pdf"   # stuck, wait about 60 s
+FINDER_DIR=test_docs SIM_POWERED=0 SIM_ON_AFTER=20 .venv/bin/python graph.py "print page 1 of four_pages.pdf"   # off, comes on after 20 s
 ```
 
 ### 2. The real printer
@@ -107,7 +110,7 @@ SIM_POWERED=0 SIM_ON_AFTER=20 .venv/bin/python graph.py "print page 1 of test_do
 Switch the printer on, then:
 
 ```
-PRINTER_BACKEND=real .venv/bin/python graph.py "print page 1 of test_docs/four_pages.pdf"
+FINDER_DIR=test_docs PRINTER_BACKEND=real .venv/bin/python graph.py "print page 1 of four_pages.pdf"
 ```
 
 Nothing prints until you type `yes`. Start with one page.
