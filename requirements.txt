@@ -1,0 +1,8 @@
+pypdf
+reportlab
+mcp[cli]<2
+langgraph
+langchain-mcp-adapters
+langchain-openai
+langchain-google-genai
+python-dotenv
