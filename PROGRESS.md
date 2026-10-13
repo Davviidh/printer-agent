@@ -17,6 +17,11 @@
 
 - `doc_finder.py`: if the file is not in Downloads, searches arXiv (only arxiv.org, allowlist checked on every redirect), shows 3 results, downloads only the one the human picks, PDF header and 30 MB checked, saved into Downloads.
 
-## Next
-- Four-role LangGraph agent graph (planner, human approval, executor with the MCP tools, checker).
-- Then: Downloads file finder, document finder, manual two-sided printing test, evals, part 2.
+## Next (as of 13 Oct, end of day)
+Homework items first:
+1. Architecture diagram and sequence diagrams of real runs.
+2. Use cases: real runs written as request -> what the printer did -> what the agent decided (logs have them).
+3. Video of a real run.
+4. Submission: one PDF, GitHub link, email to aramsargsyan@ysu.am.
+Then: part 2 (test page, photo, OCR, Bayesian optimisation of toner settings).
+Extras: two-sided printing test (4-page doc), chapters via PDF bookmarks, rerun all 17 evals (free model limit ~50/day).
