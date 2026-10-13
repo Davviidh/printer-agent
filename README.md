@@ -44,10 +44,26 @@ checker   (no tools)                     decides from the readings:
 
 ## Requirements
 
-- macOS with CUPS (built in). The real-printer mode only works with a USB Canon queue;
-  everything else works on any Mac using the simulator.
 - Python 3.11 or newer.
 - A free [OpenRouter](https://openrouter.ai) API key (the free models need no money).
+
+### Which computers it works on
+
+| Part | macOS | Linux | Windows |
+|---|---|---|---|
+| Simulator, agent, evals, arXiv | yes (tested) | should work, not tested | should work, not tested |
+| Real printer | yes (tested) | not yet | no |
+
+The real-printer mode is macOS only for now, and it was built for one printer:
+- it checks that the printer is switched on with `ioreg`, a macOS-only command
+  (on Linux this would be `lsusb`, a small change in `connector.py`)
+- it prints through CUPS (`lp`, `lpstat`, `cancel`), which macOS and Linux have and Windows does not
+- the queue name (`Canon_LBP6020`) and the toner settings (`CNTonerDensity`, `CNDraftMode`, ...)
+  are specific to the Canon i-SENSYS LBP6020B driver. Another printer needs its own queue name
+  (`lpstat -p`) and options (`lpoptions -p <queue> -l`) in `connector.py`.
+
+The macOS commands in this README (`.venv/bin/python`, `open -e`) work the same on Linux.
+On Windows use `.venv\Scripts\python` instead.
 
 ## Download and install
 
