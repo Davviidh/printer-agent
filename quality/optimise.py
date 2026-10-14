@@ -13,6 +13,8 @@ much better than the best so far it could be. High EI comes from a good
 predicted score (exploitation) OR a big uncertainty (exploration).
 
 Run on the fake printer:  .venv/bin/python quality/optimise.py
+Also save each fake print:  .venv/bin/python quality/optimise.py --save-images
+  (pictures go to quality/runs/<date_time>/)
 """
 
 import json
@@ -80,15 +82,23 @@ def next_setting(tried, rng):
                         "uncertainty": round(float(sigma[i]), 3), "ei": round(float(ei[i]), 4)}
 
 
-def run(tries=12, printer="sim"):
+def run(tries=12, printer="sim", save_images=False):
     rng = np.random.default_rng(SEED)
     tried = []
+    stamp = time.strftime('%Y%m%d_%H%M%S')
+    img_dir = HERE / "runs" / stamp
+    if save_images:
+        img_dir.mkdir(parents=True)
     for n in range(1, tries + 1):
         settings, why = next_setting(tried, rng)
         if printer != "sim":
             raise NotImplementedError("real printer comes later")
         photo, toner = sim_print.print_and_photo(**settings, rng=rng)
         cer = measure.cer_per_size(photo)
+        if save_images:
+            name = (f"try{n:02d}_density{settings['density']}_save{'On' if settings['toner_save'] else 'Off'}"
+                    f"_gamma{settings['gamma']}.png")
+            photo.save(img_dir / name)
         s, readability = score(cer, toner)
         tried.append({"try": n, "settings": settings, "score": round(s, 3),
                       "readability": round(readability, 3), "toner": round(toner, 2),
@@ -98,13 +108,15 @@ def run(tries=12, printer="sim"):
                  f"gamma {settings['gamma']}  -> readability {readability:.2f} toner {toner:.2f}% "
                  f"score {s:.3f}   (best so far: try {best['try']})"
                  + (f"   [GP predicted {why['predicted']} +/- {why['uncertainty']}]" if why else "   [start]"))
-    out = HERE / f"run_{time.strftime('%Y%m%d_%H%M%S')}.json"
+    out = HERE / f"run_{stamp}.json"
     out.write_text(json.dumps({"penalty": TONER_PENALTY, "tries": tried}, indent=1))
     log.info(f"best: {best['settings']} score {best['score']} -> saved {out.name}")
+    if save_images:
+        log.info(f"pictures of all {tries} fake prints: {img_dir}")
     return tried
 
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s",
                         handlers=[logging.StreamHandler(), logging.FileHandler(HERE / "optimise.log")])
-    run()
+    run(save_images="--save-images" in sys.argv)
