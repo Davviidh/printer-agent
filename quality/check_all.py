@@ -40,8 +40,8 @@ def main(limit=None, save_images=False):
     for i, s in enumerate(settings, 1):
         photo, toner = sim_print.print_and_photo(**s, rng=rng)
         if save_images:
-            photo.save(img_dir / f"density{s['density']:02d}_save{'On' if s['toner_save'] else 'Off'}"
-                                  f"_gamma{s['gamma']}.png")
+            sim_print.save_picture(photo, img_dir / f"density{s['density']:02d}_save{'On' if s['toner_save'] else 'Off'}"
+                                  f"_gamma{s['gamma']}")
         score, readability = optimise.score(measure.cer_per_size(photo), toner)
         results.append({"settings": s, "score": round(score, 3)})
         log.info(f"{i:>3}/{len(settings)}  {label(s)}  score {score:.3f}")

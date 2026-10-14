@@ -97,8 +97,8 @@ def run(tries=12, printer="sim", save_images=False):
         cer = measure.cer_per_size(photo)
         if save_images:
             name = (f"try{n:02d}_density{settings['density']}_save{'On' if settings['toner_save'] else 'Off'}"
-                    f"_gamma{settings['gamma']}.png")
-            photo.save(img_dir / name)
+                    f"_gamma{settings['gamma']}")
+            sim_print.save_picture(photo, img_dir / name)
         s, readability = score(cer, toner)
         tried.append({"try": n, "settings": settings, "score": round(s, 3),
                       "readability": round(readability, 3), "toner": round(toner, 2),

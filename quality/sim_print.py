@@ -64,3 +64,9 @@ def print_and_photo(density=4, toner_save=False, gamma=1.4, rng=None):
     log.debug(f"density={density} save={toner_save} gamma={gamma} -> "
               f"darkness={d:.2f} toner={toner:.2f}%")
     return photo, toner
+
+
+def save_picture(photo, path):
+    """Save just the text area of a fake photo, as a small JPEG."""
+    top = photo.crop((0, 0, photo.width, int(photo.height * 0.42)))
+    top.convert("L").save(f"{path}.jpg", quality=85)   # not with_suffix: "gamma1.4" has a dot
