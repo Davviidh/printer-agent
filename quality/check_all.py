@@ -56,16 +56,19 @@ def main(limit=None, save_images=False):
 
     runs = sorted(HERE.glob("run_*.json"))
     if runs:
-        tries = json.loads(runs[-1].read_text())["tries"]
-        best = max(tries, key=lambda t: t["score"])
-        log.info(f"The optimiser ({len(tries)} tries) picked: {label(best['settings'])}")
-        found = [(i, r) for i, r in enumerate(results, 1) if r["settings"] == best["settings"]]
-        if not found:
-            log.info("That setting was not part of this (partial) check.")
-        else:
+        run = json.loads(runs[-1].read_text())
+        n = len(run["tries"])
+        picks = {"best single try": max(run["tries"], key=lambda t: t["score"])["settings"]}
+        if "recommended" in run:
+            picks["GP recommendation"] = run["recommended"]
+        for name, pick in picks.items():
+            found = [(i, r) for i, r in enumerate(results, 1) if r["settings"] == pick]
+            if not found:
+                log.info(f"Optimiser ({n} tries), {name}: {label(pick)} - not in this partial check")
+                continue
             rank, r = found[0]
-            log.info(f"In the full check that setting is number {rank} of {len(results)}, "
-                     f"{results[0]['score'] - r['score']:.3f} below the very best.")
+            log.info(f"Optimiser ({n} tries), {name}: {label(pick)} -> rank {rank} of "
+                     f"{len(results)}, {results[0]['score'] - r['score']:.3f} below the best")
 
 
 if __name__ == "__main__":

@@ -44,7 +44,11 @@ def darkness(density, toner_save, gamma):
 
 
 def print_and_photo(density=4, toner_save=False, gamma=1.4, rng=None):
-    """Returns (photo of the printed page, toner used as % of page area)."""
+    """Returns (photo of the printed page, toner used).
+
+    Toner is relative to a perfect print of the same page: 1.0 = exactly the
+    ink the letters need, 2.0 = twice that. (Relative, so it doesn't change
+    when the test page gets more or less text.)"""
     rng = rng or np.random.default_rng()
     d = darkness(density, toner_save, gamma)
     ink = 1 - np.asarray(_perfect_page(), dtype=float) / 255           # 1 = black
@@ -53,7 +57,7 @@ def print_and_photo(density=4, toner_save=False, gamma=1.4, rng=None):
     spread += rng.normal(0, 0.05, spread.shape)                         # toner grain
     threshold = np.clip(0.62 - 0.55 * d, 0.12, 0.95)   # floor: no toner on blank paper
     printed = (spread > threshold) * min(1.0, 0.35 + 1.2 * d)          # light = grey
-    toner = 100 * printed.mean()
+    toner = printed.mean() / ink.mean()
 
     # the phone photo: a bit of blur, lower resolution, sensor noise
     paper = Image.fromarray((255 * (1 - printed)).astype(np.uint8))
@@ -62,11 +66,11 @@ def print_and_photo(density=4, toner_save=False, gamma=1.4, rng=None):
     photo = np.asarray(photo, dtype=float) + rng.normal(0, 6, (photo.height, photo.width))
     photo = Image.fromarray(np.clip(photo, 0, 255).astype(np.uint8))
     log.debug(f"density={density} save={toner_save} gamma={gamma} -> "
-              f"darkness={d:.2f} toner={toner:.2f}%")
+              f"darkness={d:.2f} toner={toner:.2f}x")
     return photo, toner
 
 
 def save_picture(photo, path):
     """Save just the text area of a fake photo, as a small JPEG."""
-    top = photo.crop((0, 0, photo.width, int(photo.height * 0.42)))
+    top = photo.crop((0, 0, photo.width, int(photo.height * 0.85)))
     top.convert("L").save(f"{path}.jpg", quality=85)   # not with_suffix: "gamma1.4" has a dot

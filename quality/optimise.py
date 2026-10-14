@@ -3,7 +3,8 @@
 Loop:  try settings -> print -> photo -> OCR -> score -> pick next settings
 
 Score (David's choice B, balanced):
-    score = readability - TONER_PENALTY * toner used (% of page)
+    score = readability - TONER_PENALTY * toner used
+    toner used: 1.0 = the ink a perfect print of the letters needs, 2.0 = twice
     readability = 1 - average OCR error rate over the 4..12 pt lines
 
 Picking the next settings: a Gaussian process (GP) learns a rough map
@@ -36,7 +37,9 @@ import sim_print  # noqa: E402
 
 log = logging.getLogger("optimise")
 
-TONER_PENALTY = 0.1       # 1 % more toner costs 0.1 readability
+# Each extra "1x" of toner costs 0.05 readability. This keeps the balance of
+# the first version (0.1 per % of page, when the page had 1/5 of the text).
+TONER_PENALTY = 0.05
 SEED = 509
 
 # every setting the printer driver allows for these three knobs
@@ -62,6 +65,25 @@ def expected_improvement(mu, sigma, best):
     return (mu - best) * norm.cdf(z) + sigma * norm.pdf(z)
 
 
+def fit_gp(tried):
+    X = np.array([features(t["settings"]) for t in tried])
+    y = np.array([t["score"] for t in tried])
+    # Matern: nearby settings give similar scores. WhiteKernel: measurements are noisy.
+    return GaussianProcessRegressor(Matern(length_scale=0.3, nu=2.5) + WhiteKernel(0.01),
+                                    normalize_y=True, random_state=SEED).fit(X, y)
+
+
+def recommend(tried):
+    """The final answer: the setting the GP PREDICTS is best, using all tries
+    together, instead of the single try that happened to score highest
+    (which may just have been lucky). Only tried settings are candidates, so
+    the answer is always something we actually saw on paper."""
+    gp = fit_gp(tried)
+    mu = gp.predict(np.array([features(t["settings"]) for t in tried]))
+    i = int(np.argmax(mu))
+    return tried[i]["settings"], round(float(mu[i]), 3)
+
+
 def next_setting(tried, rng):
     """First 3 tries spread out on purpose, then the GP + EI decide."""
     untried = [s for s in ALL if s not in [t["settings"] for t in tried]]
@@ -70,11 +92,8 @@ def next_setting(tried, rng):
                   dict(density=12, toner_save=True, gamma=1.0),
                   dict(density=8, toner_save=False, gamma=2.2)]
         return starts[len(tried)], None
-    X = np.array([features(t["settings"]) for t in tried])
     y = np.array([t["score"] for t in tried])
-    # Matern: nearby settings give similar scores. WhiteKernel: measurements are noisy.
-    gp = GaussianProcessRegressor(Matern(length_scale=0.3, nu=2.5) + WhiteKernel(0.01),
-                                  normalize_y=True, random_state=SEED).fit(X, y)
+    gp = fit_gp(tried)
     mu, sigma = gp.predict(np.array([features(s) for s in untried]), return_std=True)
     ei = expected_improvement(mu, sigma, y.max())
     i = int(np.argmax(ei))
@@ -105,12 +124,17 @@ def run(tries=12, printer="sim", save_images=False):
                       "cer": cer, "why": why})
         best = max(tried, key=lambda t: t["score"])
         log.info(f"try {n:>2}: density {settings['density']:>2} save {str(settings['toner_save']):5} "
-                 f"gamma {settings['gamma']}  -> readability {readability:.2f} toner {toner:.2f}% "
+                 f"gamma {settings['gamma']}  -> readability {readability:.2f} toner {toner:.2f}x "
                  f"score {s:.3f}   (best so far: try {best['try']})"
                  + (f"   [GP predicted {why['predicted']} +/- {why['uncertainty']}]" if why else "   [start]"))
+    rec, predicted = recommend(tried)
     out = HERE / f"run_{stamp}.json"
-    out.write_text(json.dumps({"penalty": TONER_PENALTY, "tries": tried}, indent=1))
-    log.info(f"best: {best['settings']} score {best['score']} -> saved {out.name}")
+    out.write_text(json.dumps({"penalty": TONER_PENALTY, "tries": tried,
+                               "best_measured": best["settings"],
+                               "recommended": rec, "recommended_predicted": predicted},
+                              indent=1))
+    log.info(f"best single try:  {best['settings']} measured {best['score']}")
+    log.info(f"RECOMMENDED (GP): {rec} predicted {predicted} -> saved {out.name}")
     if save_images:
         log.info(f"pictures of all {tries} fake prints: {img_dir}")
     return tried
