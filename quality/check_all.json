@@ -1,0 +1,1026 @@
+[
+ {
+  "settings": {
+   "density": 9,
+   "toner_save": false,
+   "gamma": 1.8
+  },
+  "score": 0.599
+ },
+ {
+  "settings": {
+   "density": 10,
+   "toner_save": false,
+   "gamma": 2.2
+  },
+  "score": 0.599
+ },
+ {
+  "settings": {
+   "density": 13,
+   "toner_save": true,
+   "gamma": 1.4
+  },
+  "score": 0.599
+ },
+ {
+  "settings": {
+   "density": 10,
+   "toner_save": false,
+   "gamma": 1.8
+  },
+  "score": 0.596
+ },
+ {
+  "settings": {
+   "density": 12,
+   "toner_save": true,
+   "gamma": 1.0
+  },
+  "score": 0.596
+ },
+ {
+  "settings": {
+   "density": 11,
+   "toner_save": false,
+   "gamma": 2.2
+  },
+  "score": 0.595
+ },
+ {
+  "settings": {
+   "density": 15,
+   "toner_save": true,
+   "gamma": 1.4
+  },
+  "score": 0.595
+ },
+ {
+  "settings": {
+   "density": 8,
+   "toner_save": false,
+   "gamma": 1.8
+  },
+  "score": 0.594
+ },
+ {
+  "settings": {
+   "density": 14,
+   "toner_save": true,
+   "gamma": 1.4
+  },
+  "score": 0.593
+ },
+ {
+  "settings": {
+   "density": 7,
+   "toner_save": false,
+   "gamma": 1.0
+  },
+  "score": 0.592
+ },
+ {
+  "settings": {
+   "density": 6,
+   "toner_save": false,
+   "gamma": 1.0
+  },
+  "score": 0.591
+ },
+ {
+  "settings": {
+   "density": 16,
+   "toner_save": true,
+   "gamma": 1.4
+  },
+  "score": 0.591
+ },
+ {
+  "settings": {
+   "density": 16,
+   "toner_save": true,
+   "gamma": 1.8
+  },
+  "score": 0.591
+ },
+ {
+  "settings": {
+   "density": 13,
+   "toner_save": true,
+   "gamma": 1.0
+  },
+  "score": 0.59
+ },
+ {
+  "settings": {
+   "density": 9,
+   "toner_save": false,
+   "gamma": 2.2
+  },
+  "score": 0.589
+ },
+ {
+  "settings": {
+   "density": 12,
+   "toner_save": false,
+   "gamma": 2.2
+  },
+  "score": 0.589
+ },
+ {
+  "settings": {
+   "density": 14,
+   "toner_save": true,
+   "gamma": 1.0
+  },
+  "score": 0.589
+ },
+ {
+  "settings": {
+   "density": 11,
+   "toner_save": true,
+   "gamma": 1.0
+  },
+  "score": 0.588
+ },
+ {
+  "settings": {
+   "density": 15,
+   "toner_save": true,
+   "gamma": 2.2
+  },
+  "score": 0.588
+ },
+ {
+  "settings": {
+   "density": 7,
+   "toner_save": false,
+   "gamma": 1.4
+  },
+  "score": 0.584
+ },
+ {
+  "settings": {
+   "density": 8,
+   "toner_save": false,
+   "gamma": 1.0
+  },
+  "score": 0.584
+ },
+ {
+  "settings": {
+   "density": 8,
+   "toner_save": false,
+   "gamma": 1.4
+  },
+  "score": 0.584
+ },
+ {
+  "settings": {
+   "density": 9,
+   "toner_save": false,
+   "gamma": 1.4
+  },
+  "score": 0.583
+ },
+ {
+  "settings": {
+   "density": 11,
+   "toner_save": false,
+   "gamma": 1.8
+  },
+  "score": 0.583
+ },
+ {
+  "settings": {
+   "density": 16,
+   "toner_save": true,
+   "gamma": 2.2
+  },
+  "score": 0.583
+ },
+ {
+  "settings": {
+   "density": 15,
+   "toner_save": true,
+   "gamma": 1.8
+  },
+  "score": 0.581
+ },
+ {
+  "settings": {
+   "density": 8,
+   "toner_save": false,
+   "gamma": 2.2
+  },
+  "score": 0.579
+ },
+ {
+  "settings": {
+   "density": 10,
+   "toner_save": true,
+   "gamma": 1.0
+  },
+  "score": 0.578
+ },
+ {
+  "settings": {
+   "density": 10,
+   "toner_save": false,
+   "gamma": 1.4
+  },
+  "score": 0.577
+ },
+ {
+  "settings": {
+   "density": 14,
+   "toner_save": true,
+   "gamma": 1.8
+  },
+  "score": 0.577
+ },
+ {
+  "settings": {
+   "density": 14,
+   "toner_save": true,
+   "gamma": 2.2
+  },
+  "score": 0.574
+ },
+ {
+  "settings": {
+   "density": 12,
+   "toner_save": true,
+   "gamma": 1.4
+  },
+  "score": 0.572
+ },
+ {
+  "settings": {
+   "density": 13,
+   "toner_save": true,
+   "gamma": 1.8
+  },
+  "score": 0.571
+ },
+ {
+  "settings": {
+   "density": 5,
+   "toner_save": false,
+   "gamma": 1.0
+  },
+  "score": 0.569
+ },
+ {
+  "settings": {
+   "density": 6,
+   "toner_save": false,
+   "gamma": 1.4
+  },
+  "score": 0.567
+ },
+ {
+  "settings": {
+   "density": 7,
+   "toner_save": false,
+   "gamma": 1.8
+  },
+  "score": 0.566
+ },
+ {
+  "settings": {
+   "density": 13,
+   "toner_save": false,
+   "gamma": 2.2
+  },
+  "score": 0.565
+ },
+ {
+  "settings": {
+   "density": 15,
+   "toner_save": true,
+   "gamma": 1.0
+  },
+  "score": 0.565
+ },
+ {
+  "settings": {
+   "density": 9,
+   "toner_save": true,
+   "gamma": 1.0
+  },
+  "score": 0.564
+ },
+ {
+  "settings": {
+   "density": 11,
+   "toner_save": true,
+   "gamma": 1.4
+  },
+  "score": 0.563
+ },
+ {
+  "settings": {
+   "density": 16,
+   "toner_save": true,
+   "gamma": 1.0
+  },
+  "score": 0.562
+ },
+ {
+  "settings": {
+   "density": 13,
+   "toner_save": true,
+   "gamma": 2.2
+  },
+  "score": 0.555
+ },
+ {
+  "settings": {
+   "density": 12,
+   "toner_save": true,
+   "gamma": 1.8
+  },
+  "score": 0.554
+ },
+ {
+  "settings": {
+   "density": 7,
+   "toner_save": false,
+   "gamma": 2.2
+  },
+  "score": 0.551
+ },
+ {
+  "settings": {
+   "density": 9,
+   "toner_save": false,
+   "gamma": 1.0
+  },
+  "score": 0.551
+ },
+ {
+  "settings": {
+   "density": 12,
+   "toner_save": false,
+   "gamma": 1.8
+  },
+  "score": 0.544
+ },
+ {
+  "settings": {
+   "density": 10,
+   "toner_save": true,
+   "gamma": 1.4
+  },
+  "score": 0.537
+ },
+ {
+  "settings": {
+   "density": 12,
+   "toner_save": true,
+   "gamma": 2.2
+  },
+  "score": 0.537
+ },
+ {
+  "settings": {
+   "density": 9,
+   "toner_save": true,
+   "gamma": 1.4
+  },
+  "score": 0.533
+ },
+ {
+  "settings": {
+   "density": 14,
+   "toner_save": false,
+   "gamma": 2.2
+  },
+  "score": 0.533
+ },
+ {
+  "settings": {
+   "density": 6,
+   "toner_save": false,
+   "gamma": 1.8
+  },
+  "score": 0.532
+ },
+ {
+  "settings": {
+   "density": 11,
+   "toner_save": true,
+   "gamma": 1.8
+  },
+  "score": 0.532
+ },
+ {
+  "settings": {
+   "density": 5,
+   "toner_save": false,
+   "gamma": 1.4
+  },
+  "score": 0.53
+ },
+ {
+  "settings": {
+   "density": 8,
+   "toner_save": true,
+   "gamma": 1.0
+  },
+  "score": 0.527
+ },
+ {
+  "settings": {
+   "density": 10,
+   "toner_save": true,
+   "gamma": 1.8
+  },
+  "score": 0.516
+ },
+ {
+  "settings": {
+   "density": 4,
+   "toner_save": false,
+   "gamma": 1.0
+  },
+  "score": 0.514
+ },
+ {
+  "settings": {
+   "density": 11,
+   "toner_save": true,
+   "gamma": 2.2
+  },
+  "score": 0.514
+ },
+ {
+  "settings": {
+   "density": 6,
+   "toner_save": false,
+   "gamma": 2.2
+  },
+  "score": 0.512
+ },
+ {
+  "settings": {
+   "density": 10,
+   "toner_save": false,
+   "gamma": 1.0
+  },
+  "score": 0.508
+ },
+ {
+  "settings": {
+   "density": 9,
+   "toner_save": true,
+   "gamma": 1.8
+  },
+  "score": 0.506
+ },
+ {
+  "settings": {
+   "density": 15,
+   "toner_save": false,
+   "gamma": 2.2
+  },
+  "score": 0.504
+ },
+ {
+  "settings": {
+   "density": 12,
+   "toner_save": false,
+   "gamma": 1.4
+  },
+  "score": 0.503
+ },
+ {
+  "settings": {
+   "density": 8,
+   "toner_save": true,
+   "gamma": 1.4
+  },
+  "score": 0.499
+ },
+ {
+  "settings": {
+   "density": 7,
+   "toner_save": true,
+   "gamma": 1.0
+  },
+  "score": 0.497
+ },
+ {
+  "settings": {
+   "density": 5,
+   "toner_save": false,
+   "gamma": 1.8
+  },
+  "score": 0.494
+ },
+ {
+  "settings": {
+   "density": 11,
+   "toner_save": false,
+   "gamma": 1.4
+  },
+  "score": 0.492
+ },
+ {
+  "settings": {
+   "density": 13,
+   "toner_save": false,
+   "gamma": 1.8
+  },
+  "score": 0.489
+ },
+ {
+  "settings": {
+   "density": 10,
+   "toner_save": true,
+   "gamma": 2.2
+  },
+  "score": 0.481
+ },
+ {
+  "settings": {
+   "density": 14,
+   "toner_save": false,
+   "gamma": 1.8
+  },
+  "score": 0.479
+ },
+ {
+  "settings": {
+   "density": 8,
+   "toner_save": true,
+   "gamma": 1.8
+  },
+  "score": 0.474
+ },
+ {
+  "settings": {
+   "density": 5,
+   "toner_save": false,
+   "gamma": 2.2
+  },
+  "score": 0.473
+ },
+ {
+  "settings": {
+   "density": 4,
+   "toner_save": false,
+   "gamma": 1.4
+  },
+  "score": 0.471
+ },
+ {
+  "settings": {
+   "density": 16,
+   "toner_save": false,
+   "gamma": 2.2
+  },
+  "score": 0.468
+ },
+ {
+  "settings": {
+   "density": 9,
+   "toner_save": true,
+   "gamma": 2.2
+  },
+  "score": 0.466
+ },
+ {
+  "settings": {
+   "density": 6,
+   "toner_save": true,
+   "gamma": 1.0
+  },
+  "score": 0.462
+ },
+ {
+  "settings": {
+   "density": 7,
+   "toner_save": true,
+   "gamma": 1.4
+  },
+  "score": 0.46
+ },
+ {
+  "settings": {
+   "density": 3,
+   "toner_save": false,
+   "gamma": 1.0
+  },
+  "score": 0.457
+ },
+ {
+  "settings": {
+   "density": 4,
+   "toner_save": false,
+   "gamma": 1.8
+  },
+  "score": 0.451
+ },
+ {
+  "settings": {
+   "density": 13,
+   "toner_save": false,
+   "gamma": 1.4
+  },
+  "score": 0.447
+ },
+ {
+  "settings": {
+   "density": 7,
+   "toner_save": true,
+   "gamma": 1.8
+  },
+  "score": 0.446
+ },
+ {
+  "settings": {
+   "density": 8,
+   "toner_save": true,
+   "gamma": 2.2
+  },
+  "score": 0.442
+ },
+ {
+  "settings": {
+   "density": 11,
+   "toner_save": false,
+   "gamma": 1.0
+  },
+  "score": 0.438
+ },
+ {
+  "settings": {
+   "density": 15,
+   "toner_save": false,
+   "gamma": 1.8
+  },
+  "score": 0.433
+ },
+ {
+  "settings": {
+   "density": 5,
+   "toner_save": true,
+   "gamma": 1.0
+  },
+  "score": 0.424
+ },
+ {
+  "settings": {
+   "density": 6,
+   "toner_save": true,
+   "gamma": 1.4
+  },
+  "score": 0.42
+ },
+ {
+  "settings": {
+   "density": 7,
+   "toner_save": true,
+   "gamma": 2.2
+  },
+  "score": 0.417
+ },
+ {
+  "settings": {
+   "density": 6,
+   "toner_save": true,
+   "gamma": 1.8
+  },
+  "score": 0.412
+ },
+ {
+  "settings": {
+   "density": 5,
+   "toner_save": true,
+   "gamma": 1.4
+  },
+  "score": 0.41
+ },
+ {
+  "settings": {
+   "density": 3,
+   "toner_save": false,
+   "gamma": 1.4
+  },
+  "score": 0.409
+ },
+ {
+  "settings": {
+   "density": 4,
+   "toner_save": false,
+   "gamma": 2.2
+  },
+  "score": 0.405
+ },
+ {
+  "settings": {
+   "density": 12,
+   "toner_save": false,
+   "gamma": 1.0
+  },
+  "score": 0.405
+ },
+ {
+  "settings": {
+   "density": 16,
+   "toner_save": false,
+   "gamma": 1.8
+  },
+  "score": 0.401
+ },
+ {
+  "settings": {
+   "density": 14,
+   "toner_save": false,
+   "gamma": 1.4
+  },
+  "score": 0.399
+ },
+ {
+  "settings": {
+   "density": 3,
+   "toner_save": false,
+   "gamma": 1.8
+  },
+  "score": 0.383
+ },
+ {
+  "settings": {
+   "density": 6,
+   "toner_save": true,
+   "gamma": 2.2
+  },
+  "score": 0.378
+ },
+ {
+  "settings": {
+   "density": 4,
+   "toner_save": true,
+   "gamma": 1.0
+  },
+  "score": 0.373
+ },
+ {
+  "settings": {
+   "density": 15,
+   "toner_save": false,
+   "gamma": 1.4
+  },
+  "score": 0.37
+ },
+ {
+  "settings": {
+   "density": 13,
+   "toner_save": false,
+   "gamma": 1.0
+  },
+  "score": 0.368
+ },
+ {
+  "settings": {
+   "density": 16,
+   "toner_save": false,
+   "gamma": 1.0
+  },
+  "score": 0.367
+ },
+ {
+  "settings": {
+   "density": 14,
+   "toner_save": false,
+   "gamma": 1.0
+  },
+  "score": 0.364
+ },
+ {
+  "settings": {
+   "density": 5,
+   "toner_save": true,
+   "gamma": 2.2
+  },
+  "score": 0.363
+ },
+ {
+  "settings": {
+   "density": 5,
+   "toner_save": true,
+   "gamma": 1.8
+  },
+  "score": 0.358
+ },
+ {
+  "settings": {
+   "density": 15,
+   "toner_save": false,
+   "gamma": 1.0
+  },
+  "score": 0.357
+ },
+ {
+  "settings": {
+   "density": 2,
+   "toner_save": false,
+   "gamma": 1.0
+  },
+  "score": 0.355
+ },
+ {
+  "settings": {
+   "density": 3,
+   "toner_save": false,
+   "gamma": 2.2
+  },
+  "score": 0.351
+ },
+ {
+  "settings": {
+   "density": 4,
+   "toner_save": true,
+   "gamma": 1.4
+  },
+  "score": 0.351
+ },
+ {
+  "settings": {
+   "density": 16,
+   "toner_save": false,
+   "gamma": 1.4
+  },
+  "score": 0.345
+ },
+ {
+  "settings": {
+   "density": 2,
+   "toner_save": false,
+   "gamma": 1.4
+  },
+  "score": 0.344
+ },
+ {
+  "settings": {
+   "density": 4,
+   "toner_save": true,
+   "gamma": 2.2
+  },
+  "score": 0.334
+ },
+ {
+  "settings": {
+   "density": 4,
+   "toner_save": true,
+   "gamma": 1.8
+  },
+  "score": 0.331
+ },
+ {
+  "settings": {
+   "density": 2,
+   "toner_save": false,
+   "gamma": 2.2
+  },
+  "score": 0.329
+ },
+ {
+  "settings": {
+   "density": 3,
+   "toner_save": true,
+   "gamma": 1.4
+  },
+  "score": 0.326
+ },
+ {
+  "settings": {
+   "density": 3,
+   "toner_save": true,
+   "gamma": 1.0
+  },
+  "score": 0.32
+ },
+ {
+  "settings": {
+   "density": 3,
+   "toner_save": true,
+   "gamma": 1.8
+  },
+  "score": 0.317
+ },
+ {
+  "settings": {
+   "density": 2,
+   "toner_save": false,
+   "gamma": 1.8
+  },
+  "score": 0.315
+ },
+ {
+  "settings": {
+   "density": 2,
+   "toner_save": true,
+   "gamma": 1.0
+  },
+  "score": 0.291
+ },
+ {
+  "settings": {
+   "density": 3,
+   "toner_save": true,
+   "gamma": 2.2
+  },
+  "score": 0.279
+ },
+ {
+  "settings": {
+   "density": 1,
+   "toner_save": false,
+   "gamma": 1.0
+  },
+  "score": 0.277
+ },
+ {
+  "settings": {
+   "density": 2,
+   "toner_save": true,
+   "gamma": 2.2
+  },
+  "score": 0.27
+ },
+ {
+  "settings": {
+   "density": 1,
+   "toner_save": false,
+   "gamma": 1.8
+  },
+  "score": 0.264
+ },
+ {
+  "settings": {
+   "density": 2,
+   "toner_save": true,
+   "gamma": 1.4
+  },
+  "score": 0.262
+ },
+ {
+  "settings": {
+   "density": 1,
+   "toner_save": false,
+   "gamma": 2.2
+  },
+  "score": 0.257
+ },
+ {
+  "settings": {
+   "density": 1,
+   "toner_save": false,
+   "gamma": 1.4
+  },
+  "score": 0.254
+ },
+ {
+  "settings": {
+   "density": 2,
+   "toner_save": true,
+   "gamma": 1.8
+  },
+  "score": 0.249
+ },
+ {
+  "settings": {
+   "density": 1,
+   "toner_save": true,
+   "gamma": 1.0
+  },
+  "score": 0.245
+ },
+ {
+  "settings": {
+   "density": 1,
+   "toner_save": true,
+   "gamma": 1.8
+  },
+  "score": 0.229
+ },
+ {
+  "settings": {
+   "density": 1,
+   "toner_save": true,
+   "gamma": 2.2
+  },
+  "score": 0.219
+ },
+ {
+  "settings": {
+   "density": 1,
+   "toner_save": true,
+   "gamma": 1.4
+  },
+  "score": 0.203
+ }
+]

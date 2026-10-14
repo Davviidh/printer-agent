@@ -36,3 +36,8 @@
   into page_set=odd. Fixed in the prompt (loose names are names; page_set only for the
   words odd/even) and the finder ignores filler words ("the", "document", "book").
   Added as evals name-1 and name-2.
+- Part 2 (14 Oct, fake printer): one OCR line of 30 letters is too noisy (one slip = 3%);
+  5 lines per size cut the gap between the optimiser's pick and the true best from 0.036
+  to under 0.01. Toner must be measured relative to a perfect print, else adding text
+  silently changes the score's balance. The score landscape has a flat top, so "rank 5 vs
+  rank 14" is noise; the GP recommendation was not better than the best single try here.
